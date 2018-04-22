@@ -28,16 +28,19 @@ file_env 'GIT_REPO'
 #add SSH_KEY
 mkdir -p /root/.ssh && \
 chmod 0700 /root/.ssh && \
+echo "add github to known_hosts" && \
 ssh-keyscan github.com > /root/.ssh/known_hosts && \
-echo \"${SSH_KEY}\" > /root/.ssh/id_rsa && \
+/usr/bin/printf "%s" "${SSH_KEY}" > /root/.ssh/id_rsa && \
 chmod 600 /root/.ssh/id_rsa && \
+echo "eval ssh-agent" && \
 eval `ssh-agent -s` && \
-ssh-add $HOME/.ssh/id_rsa
+printf "${SSH_KEY_PASSPHRASE}\n" | ssh-add $HOME/.ssh/id_rsa && \
 
 #clone the repo
-git clone $GIT_REPO app && \
+echo "clone repo" && \
+printf "${SSH_KEY_PASSPHRASE}\n" | git clone $GIT_REPO app && \
 cd app && \
-git submodule update --init --recursive --remote --merge
+printf "${SSH_KEY_PASSPHRASE}\n" | git submodule update --init --recursive --remote --merge
 
 #install node app
 npm i
