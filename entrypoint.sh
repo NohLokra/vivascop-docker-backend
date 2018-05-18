@@ -30,6 +30,7 @@ mkdir -p /root/.ssh && \
 chmod 0700 /root/.ssh && \
 echo "add github to known_hosts" && \
 ssh-keyscan github.com > /root/.ssh/known_hosts && \
+ssh-keyscan gitlab.bzctoons.net > /root/.ssh/known_hosts && \
 /usr/bin/printf "%s" "${SSH_KEY}" > /root/.ssh/id_rsa && \
 chmod 600 /root/.ssh/id_rsa && \
 echo "eval ssh-agent" && \
