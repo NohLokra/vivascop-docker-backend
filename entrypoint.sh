@@ -38,7 +38,7 @@ eval `ssh-agent -s` && \
 printf "${SSH_KEY_PASSPHRASE}\n" | ssh-add $HOME/.ssh/id_rsa && \
 
 #clone the repo
-echo "clone repo" && \
+echo "clone repo : $GIT_REPO" && \
 printf "${SSH_KEY_PASSPHRASE}\n" | git clone $GIT_REPO app && \
 cd app && \
 printf "${SSH_KEY_PASSPHRASE}\n" | git submodule update --init --recursive --remote --merge
