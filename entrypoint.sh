@@ -42,8 +42,13 @@ printf "${SSH_KEY_PASSPHRASE}\n" | git clone $GIT_REPO app && \
 cd app && \
 printf "${SSH_KEY_PASSPHRASE}\n" | git submodule update --init --recursive --remote --merge
 
+echo "Going unsafe now... I have some global things to do"
+npm config set user 0
+npm config set unsafe-perm true
+
 #install node app
 npm i
+npm i -g cross-env
 
 #start app
 npm run prod
