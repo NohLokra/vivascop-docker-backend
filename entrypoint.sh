@@ -51,4 +51,4 @@ npm i
 npm i -g cross-env
 
 #start app
-npm run prod
+npm start
